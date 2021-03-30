@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <style>
+        #title_news{
+            float: left;
+        }
+        #title_body {
+            float: right;
+            margin-top: 0px;
+        }
+        #block_news{
+            border: 1px solid rgb(136, 136, 136);
+            margin-top: 65px;
+            margin-left: 17.5%;
+            word-break:break-all;
+        }
+        .row{
+            width: 99%;
+        }
+    </style>
+
+    <div class="row">
+        {% for news_el in News %}
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" id="block_news">
+                    <div id ='title_news'>
+                        <h3> {{ news_el.title }}</h3>
+                        <label>Категория: {{ news_el.category }}</label>
+                    </div>
+                    <div id ='title_body'>
+                        <label>
+                            Автор: {{ news_el.author_news }}<br>
+                            {{ news_el.created_at }}<br>
+                        </label>
+                    </div>
+            </div>
+
+        {% endfor %}
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+    </div>
+
+</body>
+</html>
