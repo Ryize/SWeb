@@ -1,0 +1,88 @@
+{% load static %}
+<footer class="footer">
+    <div class="container container-footer">
+        <div class="footer__top">
+            <div class="footer__top-block footer__phone">
+                <div class="footer__top-block_icon footer__phone_icon"></div>
+                <div class="footer__top-block_inner">
+                    <p class="footer__top-block_text">Позвонить нам</p>
+                    <p class="footer__top-block_value">+7 937 740 79 87</p>
+                </div>
+            </div>
+            <div class="footer__top-block footer__mail">
+                <div class="footer__top-block_icon footer__mail_icon"></div>
+                <div class="footer__top-block_inner">
+                    <p class="footer__top-block_text">Или отправьте e-mail</p>
+                    <p class="footer__top-block_value footer__mail_value">chekashovmatvey@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer__top-block footer__contact">
+                <a href="/" class="footer__contact_link">Форма контактов</a>
+            </div>
+        </div>
+        <div class="footer__middle">
+            <a href="{% url 'home' %}" class="footer__middle_banner">
+                <img src="{% static 'Shop/img/news.jpg' %}" style="height: 100%; width: 35%;" alt="Banner"
+                     class="footer__middle_banner-img">
+            </a>
+            <a href="/" class="footer__middle_banner">
+                <img src="{% static 'Shop/img/vk.jpg' %}" id='photo' style="height: 100%; width: auto;" alt="Banner"
+                     class="footer__middle_banner-img">
+            </a>
+        </div>
+        <div class="footer__bottom">
+            <section class="footer__bottom_block">
+                <h5 class="footer__bottom_block-title">Информация</h5>
+                <ul class="footer__bottom_block-list">
+                    <li class="footer__bottom_block-item">
+                        <a href="{% url 'aboutus' %}" class="footer__bottom_block-link">О нас</a>
+                    </li>
+                    <li class="footer__bottom_block-item">
+                        <a href="{% url 'deliveryinfo' %}" class="footer__bottom_block-link">Информация о доставке</a>
+                    </li>
+                    <li class="footer__bottom_block-item">
+                        <a href="{% url 'privacy' %}" class="footer__bottom_block-link">Политика конфиденциальности и Пользовательское соглашение</a>
+                    </li>
+                </ul>
+            </section>
+            <section class="footer__bottom_block">
+                <h5 class="footer__bottom_block-title">Служба поддержки</h5>
+                <ul class="footer__bottom_block-list">
+                    <li class="footer__bottom_block-item">
+                        <a href="{% url 'contacts' %}" class="footer__bottom_block-link">Связаться с нами</a>
+                    </li>
+                    <li class="footer__bottom_block-item">
+                        <a href="{% url 'refund' %}" class="footer__bottom_block-link">О возврате</a>
+                    </li>
+                    <li class="footer__bottom_block-item">
+                        <a href="{%url 'faq' %}" class="footer__bottom_block-link">Часто задаваемые вопросы</a>
+                    </li>
+                </ul>
+            </section>
+            <section class="footer__bottom_block">
+                <h5 class="footer__bottom_block-title">Дополнительно</h5>
+                <ul class="footer__bottom_block-list">
+                    <li class="footer__bottom_block-item">
+                        <a href="{% url 'brands' %}" class="footer__bottom_block-link">Бренды</a>
+                    </li>
+                    <li class="footer__bottom_block-item">
+                        <a href="{% url 'docapi' %}" class="footer__bottom_block-link">Документация API</a>
+                    </li>
+                </ul>
+            </section>
+            {% if user.is_authenticated %}
+                <section class="footer__bottom_block">
+                    <h5 class="footer__bottom_block-title">Мой аккаунт</h5>
+                    <ul class="footer__bottom_block-list">
+                        <li class="footer__bottom_block-item">
+                            <a href="{% url 'account_logout' %}" class="footer__bottom_block-link">Выйти из аккаунта</a>
+                        </li>
+                        <li class="footer__bottom_block-item">
+                            <a href="{% url 'home' %}" class="footer__bottom_block-link">Новости</a>
+                        </li>
+                    </ul>
+                </section>
+            {% endif %}
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,144 @@
+<style>
+    #menu:hover {
+        border: 1px solid #ededed;
+        transition: all .3s;
+        border-color: #cb2d41;
+    }
+</style>
+
+<div class="menu">
+    <div class="container menu__container">
+    {% block menuFilter %}
+        <div class="catalog">
+            <div class="catalog__wrapper">
+                <div class="catalog__header" id="cat_list" style="display: nenone" onclick='catalogView()'>
+                    <span>Фильтры</span><i
+                        class="fa fa-bars catalog__header-icon"></i></div>
+                <ul class="catalog__list" id="menu" style="display: none; z-index: 20;">
+                    <script>
+                        function catalogView() {
+                            element = $('.catalog__list');
+                            display = element.css('display');
+                            if (display === 'block' || display === 'inline') {
+                                $('.catalog__list').css('display', 'none')
+                            } else {
+                                $('.c' +
+                                    'atalog__list').css('display', 'initial')
+                            }
+                            console.log(display)
+                            return 0;
+                        }
+                    </script>
+                    <li>
+                        Категории
+                    </li>
+                    {% for category in categories %}
+
+                        <li class="catalog__item" {% if this_category == category %}style="border: 1px solid #000;"{% endif %}>
+                            <a href="{{ category.get_absolute_url }}" class="catalog__link">
+                                <img src="https://imdiz.ru/files/store/img/icons_catalog/software.png"
+                                     alt="{{ category.title }}"
+                                     class="catalog__link-img">
+                                {{ category.title }}
+                            </a>
+                            {#                        <div class="catalog__subcatalog">#}
+                            {#                            <a href="/" class="catalog__subcatalog-link">PC (0)</a>#}
+                            {#                            <a href="/" class="catalog__subcatalog-link">Mac (1)</a>#}
+                            {#                        </div>#}
+                        </li>
+
+                    {% endfor %}
+
+                    <li>
+                        <br>
+                        Фильтры
+                    </li>
+
+
+                    <form action="{% url 'shop_page' %}">
+                        <br>
+                        <li class="catalog__item">
+                            <a>
+                                <img src="https://imdiz.ru/files/store/img/icons_catalog/components.png"
+                                     alt="Фильтр"
+                                     class="catalog__link-img">
+
+                                <input type="radio" name="availability" value="available" checked>Товар в наличии<br>
+                                <input type="radio" name="availability" value="noAvailable"
+                                       {% if availability and availability == 'noAvailable' %}checked{% endif %}>Товар
+                                не в наличии
+                            </a><br><br>
+                        </li>
+
+                        <li class="catalog__item">
+
+                            <a>
+                                <img src="https://imdiz.ru/files/store/img/icons_catalog/components.png"
+                                     alt="Фильтр"
+                                     class="catalog__link-img">
+                                <label>Цена от(В рюблях):</label><input class="form-control" type="number"
+                                                                        name="priceFrom"
+                                                                        {% if priceFrom %}value="{{ priceFrom }}"{% endif %}>
+                            </a><br>
+                        </li>
+
+                        <li class="catalog__item">
+                            <a>
+                                <img src="https://imdiz.ru/files/store/img/icons_catalog/components.png"
+                                     alt="Фильтр"
+                                     class="catalog__link-img">
+                                <label>Цена до(В рюблях):</label><input class="form-control" type="number"
+                                                                        name="priceBefore"
+                                                                        {% if priceBefore %}value="{{ priceBefore }}"{% endif %}>
+                            </a><br>
+                        </li>
+
+                        <li class="catalog__item">
+                            <a>
+                                <img src="https://imdiz.ru/files/store/img/icons_catalog/components.png"
+                                     alt="Фильтр"
+                                     class="catalog__link-img">
+                                <label>Компания производитель: </label><input class="form-control" type="text"
+                                                                              name="manufactured_company"
+                                                                              {% if manufactured_company %}value="{{ manufactured_company }}"{% endif %}>
+                            </a><br>
+                        </li>
+
+                        <li class="catalog__item">
+                            <a>
+                                <img src="https://imdiz.ru/files/store/img/icons_catalog/components.png"
+                                     alt="Фильтр"
+                                     class="catalog__link-img">
+                                <label>Продавец: </label><input class="form-control" type="text"
+                                                                name="seller"
+                                                                {% if seller %}value="{{ seller }}"{% endif %}>
+                            </a><br>
+                        </li>
+
+
+                        <p>
+                        <center><input type="submit" value="Отправить" class="btn btn-primary"></center>
+                        </p>
+
+                    </form>
+
+                </ul>
+            </div>
+        </div>
+    {% endblock %}
+        {% if user.is_authenticated %}
+            <nav class="menu__nav">
+                <a href="{% url 'logout' %}" class="menu__nav-link">Выйти из аккаунта</a>
+            </nav>
+        {% else %}
+            <nav class="menu__nav">
+                <p><a href="{% url 'login' %}" class="menu__nav-link">Авторизоваться</a>
+                    |
+                    <a href="{% url 'register' %}" class="menu__nav-link">Зарегестрироваться</a>
+                </p>
+            </nav>
+        {% endif %}
+        <a href="tel:+79377407987" class="menu__phone"><i class="fa fa-phone menu__phone-icon"></i> <span
+                class="menu__phone-span">Связаться с нами:</span> +7 937 740 79 87</a>
+    </div>
+</div>

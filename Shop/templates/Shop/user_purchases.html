@@ -1,0 +1,80 @@
+{% extends 'Shop/standartPageTemplate.html' %}
+{% load static %}
+
+{% block content %}
+
+    <style>
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .item {
+            padding: 20px 30px;
+            height: 100%;
+        }
+
+    .row{
+        width: 99%;
+    }
+
+    </style>
+    <br><br><br>
+
+    {% if products %}
+
+        <center><h2>Мои покупки</h2></center>
+        <br><br>
+
+        <div class="row">
+
+            {% for purchases in products %}
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 item"
+                     style="padding-top: 25px; border-bottom: 1px solid #E1E8EE; border-top: 1px solid #E1E8EE;">
+
+                    <div class="row">
+
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                            <img src="{% if purchases.photo %}{{ purchases.photo.url }}{% else %}{% static 'Shop/img/notPhotoProduct.jpg' %}{% endif %}" alt="Фото товара" style="height: 200px;"/>
+                        </div>
+
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+                            <label style="padding-left: 20%; word-break: break-all;">{{ purchases.name|safe|truncatechars_html:23 }}</label>
+
+                            <label style="padding-left: 10%;">Цена: {{ purchases.price }}</label>
+                        </div>
+                        <span>
+                            <a type="button" class="btn btn-warning" id="deleteBasketEl"
+                               href="{% url 'purchases' %}?id={{ purchases.pk }}">Удалить из корзины
+                            </a>
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+        <center>
+            <br><br><br>
+            <h3>
+                Вы ещё нечего не заказывали...
+            </h3>
+            <br><br><br>
+        </center>
+
+    {% endif %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+{% endblock %}

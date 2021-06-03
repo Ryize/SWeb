@@ -1,27 +1,20 @@
+{% load news_tags %}
+{% get_list_categories as categories %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>Главная</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
+    {% include 'baseHead.html' %}
 
 </head>
 <body>
 
 <style>
-    body{
+    body {
         background-color: rgb(37, 37, 38);
     }
+
     #title_news {
         float: left;
     }
@@ -52,34 +45,12 @@
     .row {
         width: 99%;
     }
+
 </style>
 
 <div class="row">
-    <nav class="col-xs-12 col-sm-012 col-md-12 col-lg-12 navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'home' %}">Главная</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDarkDropdown"
-                    aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
-                           data-toggle="dropdown" aria-expanded="false">
-                            Все категории
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                            {% for category in categories %}
-                                <a href="/category/{{ category.pk }}"
-                                   class="list-group-item list-group-item-action">{{ category.title }}</a>
-                            {% endfor %}
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <p style="z-index: 100;">{% include 'navbar.html' %}</p>
+    {% include 'flashMessage.html' %}
 
     {% for news_el in News %}
         <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" id="block_news">
@@ -88,25 +59,32 @@
                     <img src="{{ news_el.photo.url }}" id="photo">
                 </div>
                 <div id='title_news' class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                    <h3> {{ news_el.title }}</h3>
+                    <h3><a href="{{ news_el.get_absolute_url }}">{{ news_el.title }}</a></h3>
                     <p>
-                        {{ news_el.content|truncatechars_html:255 }}
+                        {{ news_el.content|safe|truncatechars_html:255 }}
                     </p>
 
                 </div>
                 <div id='title_body' class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <label id="title_text">
-                        Автор: {{ news_el.author_news }}<br>
+                        {% if news_el.author_news %}
+                            Автор: {{ news_el.author_news }}<br>
+                        {% endif %}
                         {{ news_el.created_at|timesince }} назад<br>
+                        <a href="{{ news_el.get_absolute_url }}">Читать далее...</a>
                     </label><br>
-                    <label style="float: bottom;">Категория: {{ news_el.category }}</label>
+                    <label style="float: bottom;">Категория: <a
+                            href="{{ news_el.category.get_absolute_url }}"> {{ news_el.category.title }}</a></label>
                 </div>
             </div>
         </div>
 
     {% endfor %}
-    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        {% include 'paginator.html' %}
+    </div>
 </div>
+
 
 </body>
 </html>

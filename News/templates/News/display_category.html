@@ -1,0 +1,86 @@
+{% load news_tags %}
+{% get_list_categories as categories %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'baseHead.html' %}
+    <title>{{ this_category }} | Новости категории</title>
+
+</head>
+<body>
+
+<style>
+    body {
+        background-color: rgb(37, 37, 38);
+    }
+
+    #title_news {
+        float: left;
+    }
+
+    #title_body {
+        float: right;
+        margin-top: 0px;
+    }
+
+    #title_text {
+        float: right;
+    }
+
+    #block_news {
+        border-radius: 17px;
+        border: 1px solid rgb(136, 136, 136);
+        margin-top: 65px;
+        margin-left: 17.5%;
+        word-break: break-all;
+        background-color: white;
+    }
+
+    #photo {
+        width: 100%;
+        height: 100%;
+    }
+
+    .row {
+        width: 99%;
+    }
+</style>
+
+<div class="row">
+    {% include 'navbar.html' %}
+
+    {% for news_el in News %}
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" id="block_news">
+            <div class="row">
+                <div class="media col-xs-4 col-sm-12 col-md-8 col-lg-4">
+                    <a href="{{ news_el.get_absolute_url }}"><img src="{{ news_el.photo.url }}" id="photo"></a>
+                </div>
+                <div id='title_news' class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <h3> <a href="{{ news_el.get_absolute_url }}">{{ news_el.title }}</a></h3>
+                    <p>
+                        {{ news_el.content|truncatechars_html:255 }}
+                    </p>
+
+                </div>
+                <div id='title_body' class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label id="title_text">
+                        {% if news_el.author_news %}
+                            Автор: {{ news_el.author_news }}<br>
+                        {% endif %}
+                        {{ news_el.created_at|timesince }} назад<br>
+                        <a href="{{ news_el.get_absolute_url }}">Читать далее...</a>
+                    </label><br>
+                    <label style="float: bottom;">Категория: {{ news_el.category.title }}</label>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        {% include 'paginator.html' %}
+    </div>
+</div>
+
+</body>
+</html>

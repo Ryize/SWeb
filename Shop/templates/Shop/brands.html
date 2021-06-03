@@ -1,0 +1,122 @@
+{% extends 'Shop/standartPageTemplate.html' %}
+{% load static %}
+{% block content %}
+
+    <style>
+        :after, :before, * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-size: 11pt;
+            text-align: left;
+            font-family: Verdana, Tahoma, sans-serif;
+        }
+
+        .container {
+            width: 70%;
+            margin: 50px auto;
+            display: block;
+        }
+
+        .container .nice-header {
+            text-align: center;
+            font-size: 4.5em;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: black;
+            position: relative;
+        }
+
+        .container .nice-header .sub {
+            color: black;
+            position: absolute;
+            top: -20px;
+            right: 0;
+            font-family: Georgia, serif;
+            font-size: 13pt;
+            font-weight: normal;
+            font-style: italic;
+            text-decoration: none;
+        }
+
+        .container .nice-header .sub:hover {
+            text-decoration: underline;
+            color: #000;
+        }
+
+        .container .faq {
+            width: 100%;
+            position: relative;
+        }
+
+        .container .faq-questions {
+            list-style: none;
+        }
+
+        .container .faq-questions, .container .faq-questions > li {
+            width: 100%;
+            display: block;
+            padding: 10px;
+        }
+
+        .container .faq-questions > li:nth-child(odd) {
+            background-color: #E8E8E8;
+        }
+
+        .container .faq-questions > li:nth-child(even) {
+            background-color: #D8D8D8;
+        }
+
+        .container .faq-questions > li h4.faq-question, .container .faq-questions > li faq-question {
+            font-size: 12pt;
+            font-weight: bold;
+            color: black;
+            cursor: pointer;
+        }
+
+        .container .faq-questions > li p.faq-answer, .container .faq-questions > li .faq-asnwer {
+            font-size: 10pt;
+            line-height: 1.5;
+            margin-top: 7px;
+            display: none;
+        }
+
+        .container .faq-questions > li p.faq-answer:hover, .container .faq-questions > li .faq-asnwer:hover {
+            color: #000;
+        }
+    a{
+        text-decoration: underline;
+    }
+    </style>
+
+    {% block deactive_filter_menu %}
+
+        {% endblock %}
+
+    <div class="row" style="width: 99%;">
+
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+            <br>
+
+            <center><p style="font-size: 205%;">Бренды</p></center>
+        <br><br><br>
+
+            {% for company in manufactured_company %}
+
+                {% for key, company_name in company.items %}
+
+                <center><p style="font-size: 145%;"><a href="{% url 'shop_page'%}?manufactured_company={{ company_name }} ">{{ company_name }}</a></p></center><br>
+
+                    {% endfor %}
+
+            {% endfor %}<br><br>
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% load i18n %}
+{% load static %}
+{% spaceless %}
+
+    <style>
+    #id_captcha_1{
+        border-width: 1px;
+    border-style: inset;
+    border-color: rgb(118, 118, 118);
+        font-size: 200%;
+    }
+    </style>
+
+<div class="form-group">
+  <label class="control-label">{{ label }}</label>
+  <div class="form-group">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        {% if audio %}
+            <a title="{% trans "Play CAPTCHA as audio file" %}" href="{{ audio }}">
+        {% endif %}
+        <img src="{{ image }}" alt="captcha" class="captcha" />
+      </div>
+      {% include "django/forms/widgets/multiwidget.html" %}
+    <a type="button" class='js-captcha-refresh'><img src="https://sun9-51.userapi.com/impg/RoyeAkdW7or5mIip6iQ9Jy8IfE_DNyZC6nWoeg/5A9aEnr1nYM.jpg?size=32x32&quality=96&sign=fb1c4a5b5e74e36754f06aca3ad66eae&type=album"></a>
+
+    </div>
+  </div>
+</div>
+{% endspaceless %}
+
+{% include 'ajaxSendCaptcha.html' %}

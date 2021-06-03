@@ -1,0 +1,32 @@
+{% extends 'Shop/standartPageTemplate.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="row" style="width: 99%;">
+
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+<br><br><br>
+            <h4><pre style="word-wrap: break-word; white-space: pre-wrap; font-size: 110%;">
+Возврат товара производится потребителем в 3'х случаях:
+    1)Товар полученный покупателем был сломан или не работал так, как заявил продавец.
+    2)Реальный характеристики товара не соответствуют заявленными продавцом.
+    3)Продавец может вернуть товар если он ему не подошёл(Товар должен быть не повреждён и на этот товар должен распространяться гарантийный талон).
+
+В ином случае, товар нельзя вернуть.
+Для того чтобы вернуть товар, напишите в тех. поддержку.
+
+
+<small>Интернет-сайт SWeb.xyz, не возвращает вам деньги, это делает продавец.</small>
+            </pre></h4>
+
+            <center>
+                <img src="{% static 'Shop/img/garantiya-kachestva.png' %}" title="Гарантия качества 100%" alt="Гарантия качества 100%" style="width: 50%;">
+            </center><br>
+
+        </div>
+
+    </div>
+
+{% endblock %}

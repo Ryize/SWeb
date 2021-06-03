@@ -1,0 +1,180 @@
+{% extends 'Shop/standartPageTemplate.html' %}
+{% load static %}
+{% block content %}
+
+    <style>
+        :after, :before, * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-size: 11pt;
+            text-align: left;
+            font-family: Verdana, Tahoma, sans-serif;
+        }
+
+        .container {
+            width: 70%;
+            margin: 50px auto;
+            display: block;
+        }
+
+        .container .nice-header {
+            text-align: center;
+            font-size: 4.5em;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: black;
+            position: relative;
+        }
+
+        .container .nice-header .sub {
+            color: black;
+            position: absolute;
+            top: -20px;
+            right: 0;
+            font-family: Georgia, serif;
+            font-size: 13pt;
+            font-weight: normal;
+            font-style: italic;
+            text-decoration: none;
+        }
+
+        .container .nice-header .sub:hover {
+            text-decoration: underline;
+            color: #000;
+        }
+
+        .container .faq {
+            width: 100%;
+            position: relative;
+        }
+
+        .container .faq-questions {
+            list-style: none;
+        }
+
+        .container .faq-questions, .container .faq-questions > li {
+            width: 100%;
+            display: block;
+            padding: 10px;
+        }
+
+        .container .faq-questions > li:nth-child(odd) {
+            background-color: #E8E8E8;
+        }
+
+        .container .faq-questions > li:nth-child(even) {
+            background-color: #D8D8D8;
+        }
+
+        .container .faq-questions > li h4.faq-question, .container .faq-questions > li faq-question {
+            font-size: 12pt;
+            font-weight: bold;
+            color: black;
+            cursor: pointer;
+        }
+
+        .container .faq-questions > li p.faq-answer, .container .faq-questions > li .faq-asnwer {
+            font-size: 10pt;
+            line-height: 1.5;
+            margin-top: 7px;
+            display: none;
+        }
+
+        .container .faq-questions > li p.faq-answer:hover, .container .faq-questions > li .faq-asnwer:hover {
+            color: #000;
+        }
+    a{
+        text-decoration: underline;
+    }
+    </style>
+
+    <div class="row" style="width: 99%;">
+
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+            <br><br><br>
+
+            <center><p style="font-size: 175%;">Часто задаваемые вопросы(FAQ)</p></center>
+
+            <div class="container">
+                <div class="faq">
+                    <ul class="faq-questions">
+                        <li>
+                            <h4 class="faq-question">Делаете ли вы возврат товара?</h4>
+                            <p class="faq-answer">Да, мы делаем возврат товара, более подробно об этом вы можете
+                                прочесть тут: <a href="{% url 'refund' %}" class="footer__bottom_block-link">О
+                                    возврате</a>
+                            </p>
+                        </li><br>
+                        <li>
+                            <h4 class="faq-question">Что делать если у меня возникли какие либо проблемы?</h4>
+                            <p class="faq-answer">Вы
+                                можете написать нам на почту(site-hunter@yandex.ru) и мы ответим на ваши вопросы.</p>
+                        </li><br>
+                        <li>
+                            <h4 class="faq-question">Почему именно ваш сайт?</h4>
+                            <p class="faq-answer">Об этом вы можете прочесть на странице: <a href="{% url 'aboutus' %}"
+                                                                                             class="footer__bottom_block-link">О
+                                нас</a>
+                            </p>
+                        </li><br>
+                        <li>
+                            <h4 class="faq-question">Я хотел(а) купитть товар, но продавец не написал на почту, что
+                                делать?</h4>
+                            <p class="faq-answer">Напишите об этом инциденте нам на почту, мы проведём проверку и вы
+                                купите товар, в противном случае мы заблокируем этого продавца</p>
+                        </li><br>
+                        <li>
+                            <h4 class="faq-question">У меня есть свой товар/услуга и я хочу его продавать, как стать
+                                продавцом?</h4>
+                            <p class="faq-answer">Всё очень просто, напишите нам на почту и мы сообщим вам несколько
+                                действий, после которых вы сможете продавать свой товар или услугу</p>
+                        </li><br>
+                    </ul>
+                </div>
+            </div>
+
+            <center>
+                <img src="{% static 'Shop/img/garantiya-kachestva.png' %}" title="Гарантия качества 100%"
+                     alt="Гарантия качества 100%" style="width: 50%;">
+            </center>
+            <br>
+
+        </div>
+
+    </div>
+
+    <script>
+        $(function () {
+            var $speed = 200;
+            var $class = 'opened';
+            var $class_open = '.faq-answer';
+
+            $(document).ready(function () {
+                $('.faq-question').on('click', function () {
+                    $ul = $(this).closest('ul');
+                    $answer = $(this).closest('li').find($class_open);
+
+                    if (!$(this).closest('li').hasClass($class)) {
+
+                        $ul.find('li').each(function () {
+                            if ($(this).hasClass($class))
+                                $(this).removeClass($class).find($class_open).slideUp($speed);
+                        });
+                    }
+
+                    $answer
+                        .slideToggle($speed)
+                        .closest('li')
+                        .toggleClass($class);
+                });
+            });
+        });
+    </script>
+
+{% endblock %}

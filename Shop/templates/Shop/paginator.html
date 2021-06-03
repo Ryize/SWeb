@@ -1,0 +1,43 @@
+{% if obj.has_other_pages %}
+    <style>
+        #pag {
+            margin-top: 75px;
+            height: 100%;
+        }
+    </style>
+    <nav aria-label="Navigation panel" id="pag">
+        <ul class="pagination justify-content-center">
+
+            {% if obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ obj.previous_page_number }}" tabindex="-1">Предыдущая
+                        страница</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Предыдущая страница</a>
+                </li>
+            {% endif %}
+            {% for p in obj.paginator.page_range %}
+
+                {% if p >= obj.number|add:-3 and p <= obj.number|add:3 %}
+                    <li class="page-item{% if p != obj.number %}{% else %} active{% endif %}"><a class="page-link"
+                                                                                                  href="?page={{ p }}">{{ p }}</a>
+                    </li>
+
+                {% endif %}
+            {% endfor %}
+            {% if obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ obj.next_page_number }}">Следующая страница</a>
+
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">Следующая страница</a>
+                </li>
+            {% endif %}
+
+        </ul>
+    </nav>
+{% endif %}

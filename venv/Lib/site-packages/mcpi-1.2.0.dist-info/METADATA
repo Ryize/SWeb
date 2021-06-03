@@ -1,0 +1,33 @@
+Metadata-Version: 2.1
+Name: mcpi
+Version: 1.2.0
+Summary: Python library for the Minecraft Pi edition and RaspberryJuice API
+Home-page: https://github.com/martinohanlon/mcpi
+Author: Martin O'Hanlon
+Author-email: martin@ohanlonweb.com
+License: MIT
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Education
+Classifier: Topic :: Games/Entertainment
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Description-Content-Type: text/markdown
+
+# Minecraft: Pi edition API Python Library
+
+`mcpi` Python library for communicating with [Minecraft: Pi edition](https://minecraft.net/en-us/edition/pi/) and [RaspberryJuice](https://github.com/zhuowei/RaspberryJuice).
+
+Visit [github.com/martinohanlon/mcpi](https://github.com/martinohanlon/mcpi) for more information.
+
+

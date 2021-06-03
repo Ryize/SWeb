@@ -2,6 +2,7 @@ from django.contrib import admin
 from News.models import News, Category
 
 
+
 class NewsAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'author_news', 'content', 'created_at', 'category', 'is_publiced')
     list_display_links = ('id', 'title', 'author_news', 'content', 'created_at')

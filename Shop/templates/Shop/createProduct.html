@@ -1,0 +1,28 @@
+{% extends 'Shop/standartPageTemplate.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="row" style="width: 99%;">
+
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+            <br>
+
+            <center><p style="font-size: 205%;">Продать свой товар</p></center>
+            <br><br><br>
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.media }}
+                {{ form.as_p }}
+                <br><p>
+                <center><input type="submit" value="Отправить" class="btn btn-primary"></center>
+                </p>
+            </form>
+            <br><br>
+
+        </div>
+    </div>
+
+{% endblock %}

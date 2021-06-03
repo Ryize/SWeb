@@ -1,0 +1,147 @@
+{% extends 'Shop/standartPageTemplate.html' %}
+
+{% block content %}
+
+    {% block deactive_filter_menu %}
+        {% load static %}
+
+    {% endblock %}
+
+    <style>
+        td {
+            font-size: 115%;
+        }
+    </style>
+
+    <div class='row' style="width: 99%;">
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <br>
+            <h1>{{ product.name }}</h1>
+        </div>
+
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <img src="
+                    {% if product.photo %}{{ product.photo.url }}{% else %}{% static 'Shop/img/notPhotoProduct.jpg' %}{% endif %}"
+                 id='avatar_product' style="width: 100%;">
+        </div>
+
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+
+        <br><br><br>
+
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" id='long_text'>
+
+            <h2 id='long_text'>Описание товара:</h2> <label
+                style="font-size: 105%;">{{ product.description | safe }}</label>
+            <br><br><br>
+            <h2>
+                Тех. документ: </h2>
+            <table border="1" width="100%" cellpadding="5">
+
+                <tr>
+                    <td>Наименование товара</td>
+                    <td>{{ product.name }}</td>
+                </tr>
+
+                <tr>
+
+                    <td>Наличие товара</td>
+                    <td>
+                        {% if product.availability == True %}
+                            <span>В наличии</span>
+                        {% else %}
+                            <span style="color: #cb2d41">Товара нет в наличии</span>
+                        {% endif %}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Категория товара</td>
+                    <td>{{ product.category }}</td>
+                </tr>
+
+                {% if product.manufacturer_company %}
+
+                    <tr>
+                        <td>Компания производитель</td>
+                        <td>{{ product.manufacturer_company }}</td>
+                    </tr>
+                {% endif %}
+
+                <tr>
+                    <td>
+                        {% if product.features %}
+                            Особенности товара
+                        {% endif %}
+                    </td>
+                    <td>{{ product.features }}</td>
+                </tr>
+
+                <tr>
+
+                    <td>
+                        Гарантия на товар
+                    </td>
+                    <td>{% if product.warranty %} {{ product.warranty }} месяцев {% else %} Не
+                        указанно {% endif %} </td>
+                </tr>
+
+                <tr>
+                    <td>Выставлен на продажу</td>
+                    <td>{{ product.created_at }}</td>
+                </tr>
+
+                <tr>
+                    <td>Продавец</td>
+                    <td>{{ product.seller }}</td>
+                </tr>
+
+            </table>
+
+            <br><br>
+
+            {% if user.is_authenticated and product.availability %}
+                <center>
+                    <form>
+                        {% csrf_token %}
+                        <input type="hidden" name="productID" value="{{ product.pk }}">
+                        <input type="submit" value="Купить" class="btn btn-success" style="width: 50%;">
+                    </form>
+                </center>
+
+            {% elif user.is_authenticated == False %}
+                <center>
+                    <form>
+                        <h6 onclick="alert('Вам нужно авторизоваться для покупки!')">
+                            <input title="Вы не можете сделать это!" type="button" value="Купить"
+                                   class="btn btn-danger disabled" style="width: 50%;">
+                        </h6>
+                    </form>
+                </center>
+
+            {% elif product.availability == False %}
+                <center>
+                    <form>
+                        <h6 onclick="alert('Этого товара нет в наличии!')">
+                            <input title="Вы не можете сделать это!" type="button" value="Купить"
+                                   class="btn btn-danger disabled" style="width: 50%;">
+                        </h6>
+                    </form>
+                </center>
+            {% endif %}
+
+        </div>
+
+    </div>
+    <br><br><br>
+    <hr>
+    <br><br><br>
+    <div class='row'>
+        <div class='col-xs-2 col-sm-2 col-md-2 col-lg-2'></div>
+
+
+    </div>
+
+
+{% endblock %}
