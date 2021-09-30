@@ -19,12 +19,22 @@
                 </li>
             {% endif %}
             {% for p in obj.paginator.page_range %}
+            
+                {% if forloop.first and p < obj.number|add:-3 %}
+                    <li class="page-item"><a class="page-link" href="?page=1">1</a>
+                    <li class="page-item"><a class="page-link" >...</a> </li>
+                {% endif %}
 
                 {% if p >= obj.number|add:-3 and p <= obj.number|add:3 %}
                     <li class="page-item{% if p != obj.number %}{% else %} active{% endif %}"><a class="page-link"
                                                                                                   href="?page={{ p }}">{{ p }}</a>
                     </li>
 
+                {% endif %}
+        
+                {% if forloop.last and p > obj.number|add:3 %}
+                    <li class="page-item"><a class="page-link" >...</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a>
                 {% endif %}
             {% endfor %}
             {% if obj.has_next %}
