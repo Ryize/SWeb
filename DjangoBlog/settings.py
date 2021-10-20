@@ -205,7 +205,7 @@ LOGOUT_REDIRECT_URL = 'account_login'
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'site-hunter.ru@yandex.ru'
-EMAIL_HOST_PASSWORD = 'qazwsx112'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
