@@ -1,38 +1,39 @@
 # SWeb
 
-Online store template. Implemented registration, authorization, filters, adding / deleting goods, API, admin panel.
+Шаблон интернет-магазина. Реализована регистрация, авторизация, фильтры, добавление/удаление товаров, API, админ-панель.
+По мимо магазина в проекте есть небольшой блог.
 
-## Deploy locally:
+## Прежде всего:
 
-Clone the repository and go to installed folder:
+Клонируйте репозиторий и перейдите в установленную папку:
 ```
 git clone https://github.com/Ryize/SWeb.git
 cd SWeb
 ```
 
-Install requirements:
+Установите requirements:
 ```
 pip3 install -r requirements.txt
 ```
-> If you are deploying a project to a server or hosting with a domain, then specify it in the project settings in the ALLOWED_HOSTS(DjangoBlog.settings) variable
+> Если вы развертываете проект на сервере или хостинге с доменом, то укажите это в настройках проекта в ALLOWED_HOSTS(DjangoBlog.settings) переменная
 ```
 ALLOWED_HOSTS = ['127.0.0.1']
 ```
 
-> If the DEBUG mode is disabled(False), the site will stop automatically collecting statics and media, do not forget to configure Nginx/Apache
+> Если режим DEBUG отключен (False), сайт перестанет автоматически собирать статику и медиа, не забудьте сконфигурировать Nginx/Apache
 ```
 DEBUG = True
 ```
 
-Collect statics and run migrations:
+Соберите statics и выполните migrations:
 ```
 python3 manage.py collectstatic
 python3 manage.py migrate
 ```
 
-Run the website:
+Запустите проект:
 ```
 python3 manage.py runserver
 ```
 
-> Technologies used in the project: Python 3, Django, djangorestapi.
+> Технологии используемые в проекте: Python 3, Django, djangorestapi.
