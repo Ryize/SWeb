@@ -54,3 +54,4 @@ uritemplate==3.0.1
 urllib3==1.26.4
 vine==5.0.0
 wcwidth==0.2.5
+django-ckeditor==6.7.1
