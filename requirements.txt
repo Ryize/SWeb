@@ -51,7 +51,7 @@ social-auth-app-django==4.0.0
 social-auth-core==4.1.0
 sqlparse==0.4.1
 uritemplate==3.0.1
-urllib3==1.26.4
+urllib3==1.26.5
 vine==5.0.0
 wcwidth==0.2.5
 django-ckeditor==6.7.1
